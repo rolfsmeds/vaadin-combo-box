@@ -81,8 +81,7 @@ This program is available under Apache License Version 2.0, available at https:/
             reflectToAttribute: true,
             value: () => {
               try {
-                document.createEvent('TouchEvent');
-                return true;
+                return !!document.createEvent('TouchEvent');
               } catch (e) {
                 return false;
               }
@@ -383,19 +382,6 @@ This program is available under Apache License Version 2.0, available at https:/
         // Ensure viewport boundaries are up-to-date
         this.updateViewportBoundaries();
         return this._selector.lastVisibleIndex - this._selector.firstVisibleIndex + 1;
-      }
-
-      _selectItem(item) {
-        item = (typeof item === 'number') ? this._items[item] : item;
-        if (this._selector.selectedItem !== item) {
-          this._selector.selectItem(item);
-        }
-      }
-
-      _preventDefault(e) {
-        if (e.cancelable) {
-          e.preventDefault();
-        }
       }
 
       _stopPropagation(e) {
